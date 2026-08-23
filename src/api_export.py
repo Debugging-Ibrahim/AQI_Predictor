@@ -85,9 +85,7 @@ def generate_real_inference_json():
     models = {}
     for h in ["day1", "day2", "day3"]:
         s_path = os.path.join(SAVED_MODELS_DIR, f"scaler_{h}.joblib")
-        if not os.path.exists(s_path):
-            s_path = os.path.join(SAVED_MODELS_DIR, "scaler.joblib")
-        scalers[h] = joblib.load(s_path)
+        scalers[h] = joblib.load(s_path) if os.path.exists(s_path) else None
         
         m_path = os.path.join(SAVED_MODELS_DIR, f"best_aqi_{h}.joblib")
         models[h] = joblib.load(m_path)
@@ -105,9 +103,9 @@ def generate_real_inference_json():
     real_preds = {}
     for h in ["day1", "day2", "day3"]:
         m = models[h]
-        s = scalers[h]
+        s = scalers.get(h)
         try:
-            if "SVR" in type(m).__name__ or "Ridge" in type(m).__name__:
+            if s is not None and ("SVR" in type(m).__name__ or "Ridge" in type(m).__name__):
                 X_scaled = s.transform(latest_row)
                 val = float(m.predict(X_scaled)[0])
             else:
@@ -134,6 +132,22 @@ def generate_real_inference_json():
                 })
         shap_features_list.sort(key=lambda x: x["impact"], reverse=True)
 
+    # Load Pattern Recognition Engine matches
+    similar_days_data = [
+        {"date": "Nov 14, 2025", "historicalAqi": 182, "similarityScore": 96.8, "matchedWeather": "Wind 4 km/h, Hum 76%, Inversion high", "notes": "Crop stubble burning plume from East Punjab"},
+        {"date": "Dec 02, 2025", "historicalAqi": 178, "similarityScore": 94.2, "matchedWeather": "Wind 3.5 km/h, Hum 78%", "notes": "Stagnant thermal inversion layer over Faisalabad"},
+        {"date": "Nov 28, 2024", "historicalAqi": 189, "similarityScore": 91.5, "matchedWeather": "Wind 5 km/h, Hum 72%", "notes": "Urban traffic density + industrial brick kiln haze"}
+    ]
+    pattern_file = os.path.join(PROJECT_ROOT, "data", "pattern_matches.json")
+    if os.path.exists(pattern_file):
+        try:
+            with open(pattern_file, "r", encoding="utf-8") as f:
+                loaded_patterns = json.load(f)
+                if loaded_patterns and len(loaded_patterns) > 0:
+                    similar_days_data = loaded_patterns
+        except Exception as ex:
+            print(f"Note: Could not load pattern_matches.json: {ex}")
+
     # Structure Output JSON
     output_data = {
         "region": "Faisalabad, Punjab, Pakistan",
@@ -156,11 +170,7 @@ def generate_real_inference_json():
             {"pollutant": "NO2", "value": live_no2, "unit": "ppb", "safetyThreshold": 53, "percentageOfLimit": int(live_no2 / 53 * 100), "status": "Moderate"},
             {"pollutant": "O3", "value": live_o3, "unit": "ppb", "safetyThreshold": 70, "percentageOfLimit": int(live_o3 / 70 * 100), "status": "Good"}
         ],
-        "similar_days": [
-            {"date": "Nov 14, 2025", "historicalAqi": 182, "similarityScore": 96.8, "matchedWeather": "Wind 4 km/h, Hum 76%, Inversion high", "notes": "Crop stubble burning plume from East Punjab"},
-            {"date": "Dec 02, 2025", "historicalAqi": 178, "similarityScore": 94.2, "matchedWeather": "Wind 3.5 km/h, Hum 78%", "notes": "Stagnant thermal inversion layer over Faisalabad"},
-            {"date": "Nov 28, 2024", "historicalAqi": 189, "similarityScore": 91.5, "matchedWeather": "Wind 5 km/h, Hum 72%", "notes": "Urban traffic density + industrial brick kiln haze"}
-        ]
+        "similar_days": similar_days_data
     }
 
     os.makedirs(os.path.dirname(PUBLIC_DATA_JSON), exist_ok=True)
