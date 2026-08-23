@@ -35,5 +35,5 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add saved_models/ report.md
-          git diff --quiet && git diff --staged --quiet || (git commit -m "auto: retrain Day 1 SVR, Day 2 SVR, Day 3 CatBoost & Pattern Engine [skip ci]" && git push)
+          git add saved_models/ report.md data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "auto: retrain models" && git push)
