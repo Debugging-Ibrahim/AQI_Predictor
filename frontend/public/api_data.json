@@ -1,11 +1,11 @@
 {
   "region": "Faisalabad, Punjab, Pakistan",
-  "last_updated": "2026-08-23T15:13:05.395221+00:00",
+  "last_updated": "2026-08-23T20:34:42.493116+00:00",
   "predictions": {
-    "today": 150.0,
-    "day1": 150.0,
-    "day2": 134.6,
-    "day3": 131.6
+    "today": 152.7,
+    "day1": 152.7,
+    "day2": 136.0,
+    "day3": 132.8
   },
   "models_loaded": {
     "day1": "SVR",
