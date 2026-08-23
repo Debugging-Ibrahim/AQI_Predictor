@@ -21,4 +21,12 @@ ds_env/
 # IDE files
 .vscode/
 .idea/
+# CatBoost Logs
+catboost_info/
+
+# Node Dependencies
+node_modules/
+
 brain.md
+
+saved_models/
