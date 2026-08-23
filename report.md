@@ -582,3 +582,14 @@ All three saved model/scaler pairs were confirmed to exactly match the final pro
 ## Overall Takeaway
 
 Across all nine challenges, the consistent resolution pattern was the same: **never accept a surprising or convenient result at face value — trace it back to its root cause with direct evidence** (raw data inspection, controlled ablations, statistical testing, or object-level verification) before including it in the final report. This transformed what could have been a series of quietly inconsistent or misleading conclusions into a fully auditable, defensible model development process, from raw data through to locked production artifacts.
+
+---
+
+## Automated Pipeline Retraining Summary (2026-08-23 20:40:18)
+
+| Horizon | Winning Architecture | Preprocessor | Sample Weighting | Test RMSE | Test MAE | Test R² | Saved Artifact |
+| :--- | :--- | :--- | :--- | :---: | :---: | :---: | :--- |
+| **Day 1** | **SVR** | `StandardScaler` | Exponential Recency ($W_i = e^{-0.5 t_{age}}$) | **22.94** | **17.58** | **0.7198** | `saved_models/best_aqi_day1.joblib` |
+| **Day 2** | **SVR** | `RobustScaler` | $2.5\times$ Smog Penalty ($AQI > 150$) | **30.18** | **22.53** | **0.4780** | `saved_models/best_aqi_day2.joblib` |
+| **Day 3** | **CatBoostRegressor** | `None (Tree-Based)` | Standard Unweighted Fit | **31.79** | **24.33** | **0.3872** | `saved_models/best_aqi_day3.joblib` |
+
