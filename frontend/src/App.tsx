@@ -463,31 +463,31 @@ export default function App() {
                 {/* HOURLY AQI SCROLLER (24-HOUR CYCLE FROM 12 AM TO 11 PM, AUTO-SCROLLED TO CURRENT HOUR) */}
                 <div
                   ref={hourlyContainerRef}
-                  className="flex gap-2 overflow-x-auto pb-2 pt-2.5 px-1 w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+                  className="flex gap-2.5 overflow-x-auto pb-3 pt-3 px-1.5 w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth items-center"
                 >
                   {hourlyTrajectory.map((h) => (
                     <div
                       key={h.hourNum}
                       data-current-hour={h.isCurrent ? 'true' : 'false'}
-                      className={`shrink-0 w-20 rounded-xl p-2.5 text-center backdrop-blur-xl border transition-all flex flex-col items-center justify-between space-y-1 relative ${
+                      className={`shrink-0 w-20 rounded-2xl p-2.5 text-center backdrop-blur-2xl border transition-all duration-300 flex flex-col items-center justify-between space-y-1 relative ${
                         h.isCurrent
-                          ? 'ring-2 ring-emerald-400 border-emerald-400 bg-emerald-500/25 shadow-[0_0_20px_rgba(52,211,153,0.45)] scale-[1.04] z-10'
-                          : h.epa.border
+                          ? 'bg-sky-400/20 border-sky-300/70 shadow-[0_0_22px_rgba(56,189,248,0.4)] scale-[1.07] z-10'
+                          : 'bg-white/10 border-white/15 hover:bg-white/15 hover:border-white/25 shadow-sm'
                       }`}
                     >
                       {h.isCurrent && (
-                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-emerald-400 text-slate-950 text-[8px] font-black uppercase px-2 py-0.5 rounded-full shadow-[0_0_10px_#34d399] tracking-widest whitespace-nowrap animate-pulse">
+                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-sky-400 text-slate-950 text-[8px] font-black uppercase px-2 py-0.5 rounded-full shadow-[0_0_12px_rgba(56,189,248,0.6)] tracking-widest whitespace-nowrap animate-pulse">
                           NOW
                         </span>
                       )}
 
-                      <span className={`text-[10px] font-bold block ${h.isCurrent ? 'text-emerald-300 font-black' : 'text-white/80'}`}>
+                      <span className={`text-[10px] font-bold block ${h.isCurrent ? 'text-sky-200 font-black' : 'text-white/80'}`}>
                         {h.time}
                       </span>
                       
                       <div className="my-0.5 flex items-center justify-center">
                         {h.aqi > 160 ? (
-                          <CloudFog className={`w-4 h-4 ${h.isCurrent ? 'text-emerald-200' : 'text-stone-300'}`} />
+                          <CloudFog className={`w-4 h-4 ${h.isCurrent ? 'text-sky-200' : 'text-stone-300'}`} />
                         ) : h.isDay ? (
                           <Sun className={`w-4 h-4 ${h.isCurrent ? 'text-amber-300' : 'text-amber-300'}`} />
                         ) : (
@@ -495,7 +495,7 @@ export default function App() {
                         )}
                       </div>
 
-                      <span className={`text-base font-extrabold block ${h.isCurrent ? 'text-emerald-300 font-black' : 'text-white'}`}>
+                      <span className={`text-base font-extrabold block ${h.isCurrent ? 'text-sky-200 font-black' : 'text-white'}`}>
                         {h.aqi}
                       </span>
                     </div>
