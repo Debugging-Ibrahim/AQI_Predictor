@@ -413,16 +413,13 @@ export default function App() {
               {/* Hero Summary Top */}
               <div className="space-y-2">
                 
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 text-[11px] font-semibold uppercase tracking-wider text-white shadow-sm self-start">
-                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-                  <span>AQI &amp; Smog Forecast</span>
-                </div>
+                {/* Invisible Spacer to keep vertical layout position unchanged */}
+                <div className="h-7 opacity-0 pointer-events-none" />
 
                 {/* Headline */}
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-tight">
-                  Severe Smog <br />
-                  <span className="font-normal text-white/90">with Unhealthy Air</span>
+                  Breathe Smarter <br />
+                  <span className="font-normal text-white/90">Know Your Air</span>
                 </h1>
 
                 {/* Blurb Copy */}
@@ -439,7 +436,6 @@ export default function App() {
                 <div className="flex items-center justify-between px-1">
                   <div className="flex items-center gap-2">
                     <span className="text-[11px] font-bold uppercase text-white/70 tracking-wider">24-HOUR HOURLY TRAJECTORY</span>
-                    <span className="text-[9px] font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-400/30">1-Hour Intervals</span>
                   </div>
 
                   {/* Interactive Date Horizon Selector Tabs */}
@@ -475,12 +471,6 @@ export default function App() {
                           : 'bg-white/10 border-white/15 hover:bg-white/15 hover:border-white/25 shadow-sm'
                       }`}
                     >
-                      {h.isCurrent && (
-                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-sky-400 text-slate-950 text-[8px] font-black uppercase px-2 py-0.5 rounded-full shadow-[0_0_12px_rgba(56,189,248,0.6)] tracking-widest whitespace-nowrap animate-pulse">
-                          NOW
-                        </span>
-                      )}
-
                       <span className={`text-[10px] font-bold block ${h.isCurrent ? 'text-sky-200 font-black' : 'text-white/80'}`}>
                         {h.time}
                       </span>
@@ -633,10 +623,7 @@ export default function App() {
             {/* SEPARATE PAGE SECTION: LIVE API CONCENTRATIONS */}
             <div className="bg-white/10 border border-white/15 rounded-2xl p-5 space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-base font-semibold text-white">Live API Measured Concentrations (Open-Meteo Air Quality Pipeline)</h3>
-                <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/30 text-emerald-200 border border-emerald-400/30">
-                  Real-Time Telemetry Stream
-                </span>
+                <h3 className="text-base font-semibold text-white">Live API Measured Concentrations</h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
