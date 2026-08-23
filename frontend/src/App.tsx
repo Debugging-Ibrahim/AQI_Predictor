@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -91,6 +91,17 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [notificationActive, setNotificationActive] = useState(true);
 
+  const [currentHour, setCurrentHour] = useState<number>(new Date().getHours());
+  const hourlyContainerRef = useRef<HTMLDivElement>(null);
+
+  // Keep system hour updated live
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHour(new Date().getHours());
+    }, 60000);
+    return () => clearInterval(timer);
+  }, []);
+
   // Fetch real data JSON
   useEffect(() => {
     fetch('/api_data.json')
@@ -180,19 +191,45 @@ export default function App() {
 
   const dynamicAnalogues = getDynamicAnalogueMatches(selectedDayIdx);
 
-  // 24 consecutive 1-hour timesteps for scroller scene
-  const hourlyTrajectory = Array.from({ length: 14 }).map((_, i) => {
-    const hr = i;
-    const hourLabel = hr === 0 ? 'Now' : hr < 12 ? `${hr} AM` : hr === 12 ? '12 PM' : `${hr - 12} PM`;
-    const val = Math.round(currentSel.aqi + Math.sin(i * 0.5) * 16);
+  // 24 consecutive 1-hour timesteps (00:00 to 23:00) covering the full day cycle starting from 12 AM
+  const hourlyTrajectory = Array.from({ length: 24 }).map((_, hr) => {
+    const is12Am = hr === 0;
+    const is12Pm = hr === 12;
+    const hourLabel = is12Am
+      ? '12 AM'
+      : hr < 12
+        ? `${hr} AM`
+        : is12Pm
+          ? '12 PM'
+          : `${hr - 12} PM`;
+
+    // Realistic atmospheric diurnal variation curve (morning radiation inversion peak + afternoon solar mixing dip)
+    const diurnalOffset = Math.sin((hr - 8) * (Math.PI / 12)) * -20 + Math.cos((hr - 2) * (Math.PI / 6)) * 6;
+    const val = Math.max(35, Math.round(currentSel.aqi + diurnalOffset));
     const isDay = hr >= 6 && hr <= 18;
+    const isCurrent = selectedDayIdx === 0 && hr === currentHour;
+
     return {
+      hourNum: hr,
       time: hourLabel,
       aqi: val,
       epa: getEPAInfo(val),
       isDay,
+      isCurrent,
     };
   });
+
+  // Auto-scroll scroller to center the current hour card when dashboard mounts or day tab changes
+  useEffect(() => {
+    if (activeTab === 'dashboard' && hourlyContainerRef.current) {
+      setTimeout(() => {
+        const currentCard = hourlyContainerRef.current?.querySelector('[data-current-hour="true"]');
+        if (currentCard) {
+          currentCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }, 150);
+    }
+  }, [activeTab, selectedDayIdx, currentHour]);
 
   const timeSeriesData = Array.from({ length: 20 }).map((_, i) => ({
     date: `Aug ${i + 4}`,
@@ -423,26 +460,44 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* HOURLY AQI SCROLLER (SCROLLBAR HIDDEN VIA TAILWIND CLASS) */}
-                <div className="flex gap-2 overflow-x-auto pb-1 w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                  {hourlyTrajectory.map((h, i) => (
+                {/* HOURLY AQI SCROLLER (24-HOUR CYCLE FROM 12 AM TO 11 PM, AUTO-SCROLLED TO CURRENT HOUR) */}
+                <div
+                  ref={hourlyContainerRef}
+                  className="flex gap-2 overflow-x-auto pb-2 pt-2.5 px-1 w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden scroll-smooth"
+                >
+                  {hourlyTrajectory.map((h) => (
                     <div
-                      key={i}
-                      className={`shrink-0 w-20 rounded-xl p-2.5 text-center backdrop-blur-xl border transition-all flex flex-col items-center justify-between space-y-1 ${h.epa.border}`}
+                      key={h.hourNum}
+                      data-current-hour={h.isCurrent ? 'true' : 'false'}
+                      className={`shrink-0 w-20 rounded-xl p-2.5 text-center backdrop-blur-xl border transition-all flex flex-col items-center justify-between space-y-1 relative ${
+                        h.isCurrent
+                          ? 'ring-2 ring-emerald-400 border-emerald-400 bg-emerald-500/25 shadow-[0_0_20px_rgba(52,211,153,0.45)] scale-[1.04] z-10'
+                          : h.epa.border
+                      }`}
                     >
-                      <span className="text-[10px] font-bold text-white/80 block">{h.time}</span>
+                      {h.isCurrent && (
+                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-emerald-400 text-slate-950 text-[8px] font-black uppercase px-2 py-0.5 rounded-full shadow-[0_0_10px_#34d399] tracking-widest whitespace-nowrap animate-pulse">
+                          NOW
+                        </span>
+                      )}
+
+                      <span className={`text-[10px] font-bold block ${h.isCurrent ? 'text-emerald-300 font-black' : 'text-white/80'}`}>
+                        {h.time}
+                      </span>
                       
                       <div className="my-0.5 flex items-center justify-center">
                         {h.aqi > 160 ? (
-                          <CloudFog className="w-4 h-4 text-stone-300" />
+                          <CloudFog className={`w-4 h-4 ${h.isCurrent ? 'text-emerald-200' : 'text-stone-300'}`} />
                         ) : h.isDay ? (
-                          <Sun className="w-4 h-4 text-amber-300" />
+                          <Sun className={`w-4 h-4 ${h.isCurrent ? 'text-amber-300' : 'text-amber-300'}`} />
                         ) : (
-                          <Moon className="w-4 h-4 text-indigo-200" />
+                          <Moon className={`w-4 h-4 ${h.isCurrent ? 'text-indigo-200' : 'text-indigo-200'}`} />
                         )}
                       </div>
 
-                      <span className="text-base font-extrabold text-white block">{h.aqi}</span>
+                      <span className={`text-base font-extrabold block ${h.isCurrent ? 'text-emerald-300 font-black' : 'text-white'}`}>
+                        {h.aqi}
+                      </span>
                     </div>
                   ))}
                 </div>
