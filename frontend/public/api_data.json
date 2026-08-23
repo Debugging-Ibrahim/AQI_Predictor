@@ -1,0 +1,116 @@
+{
+  "region": "Faisalabad, Punjab, Pakistan",
+  "last_updated": "2026-08-23T15:13:05.395221+00:00",
+  "predictions": {
+    "today": 150.0,
+    "day1": 150.0,
+    "day2": 134.6,
+    "day3": 131.6
+  },
+  "models_loaded": {
+    "day1": "SVR",
+    "day2": "SVR",
+    "day3": "CatBoostRegressor"
+  },
+  "shap_features": [
+    {
+      "feature": "month_cos",
+      "name": "Month Cos",
+      "impact": 10.8,
+      "unit": "Weight %",
+      "description": "Real CatBoost model importance: 10.8%"
+    },
+    {
+      "feature": "surface_pressure_rolling_mean_24h",
+      "name": "Surface Pressure Rolling Mean 24H",
+      "impact": 8.1,
+      "unit": "Weight %",
+      "description": "Real CatBoost model importance: 8.1%"
+    },
+    {
+      "feature": "us_aqi_lag_96h",
+      "name": "Us Aqi Lag 96H",
+      "impact": 8.0,
+      "unit": "Weight %",
+      "description": "Real CatBoost model importance: 8.0%"
+    },
+    {
+      "feature": "us_aqi_rolling_mean_72h",
+      "name": "Us Aqi Rolling Mean 72H",
+      "impact": 7.3,
+      "unit": "Weight %",
+      "description": "Real CatBoost model importance: 7.3%"
+    },
+    {
+      "feature": "day_sin",
+      "name": "Day Sin",
+      "impact": 5.2,
+      "unit": "Weight %",
+      "description": "Real CatBoost model importance: 5.2%"
+    },
+    {
+      "feature": "us_aqi_lag_48h",
+      "name": "Us Aqi Lag 48H",
+      "impact": 5.0,
+      "unit": "Weight %",
+      "description": "Real CatBoost model importance: 5.0%"
+    }
+  ],
+  "pollutants": [
+    {
+      "pollutant": "PM2.5",
+      "value": 73.8,
+      "unit": "\u00b5g/m\u00b3",
+      "safetyThreshold": 35,
+      "percentageOfLimit": 210,
+      "status": "Hazardous (2.6x EPA Limit)"
+    },
+    {
+      "pollutant": "PM10",
+      "value": 94.1,
+      "unit": "\u00b5g/m\u00b3",
+      "safetyThreshold": 150,
+      "percentageOfLimit": 62,
+      "status": "Unhealthy"
+    },
+    {
+      "pollutant": "NO2",
+      "value": 41.9,
+      "unit": "ppb",
+      "safetyThreshold": 53,
+      "percentageOfLimit": 79,
+      "status": "Moderate"
+    },
+    {
+      "pollutant": "O3",
+      "value": 31.0,
+      "unit": "ppb",
+      "safetyThreshold": 70,
+      "percentageOfLimit": 44,
+      "status": "Good"
+    }
+  ],
+  "similar_days": [
+    {
+      "date": "Nov 14, 2025",
+      "historicalAqi": 182,
+      "similarityScore": 96.8,
+      "matchedWeather": "Wind 4 km/h, Hum 76%, Inversion high",
+      "notes": "Crop stubble burning plume from East Punjab"
+    },
+    {
+      "date": "Dec 02, 2025",
+      "historicalAqi": 178,
+      "similarityScore": 94.2,
+      "matchedWeather": "Wind 3.5 km/h, Hum 78%",
+      "notes": "Stagnant thermal inversion layer over Faisalabad"
+    },
+    {
+      "date": "Nov 28, 2024",
+      "historicalAqi": 189,
+      "similarityScore": 91.5,
+      "matchedWeather": "Wind 5 km/h, Hum 72%",
+      "notes": "Urban traffic density + industrial brick kiln haze"
+    }
+  ]
+}

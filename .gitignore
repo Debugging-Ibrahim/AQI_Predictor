@@ -24,8 +24,10 @@ ds_env/
 # CatBoost Logs
 catboost_info/
 
-# Node Dependencies
+# Node Dependencies & Build Output
 node_modules/
+frontend/node_modules/
+frontend/dist/
 
 brain.md
 

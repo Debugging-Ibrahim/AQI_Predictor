@@ -67,32 +67,38 @@ def engineer_features(df):
 
     # US AQI Lags & Rolling Means
     df["us_aqi_lag_1h"] = df["us_aqi"].shift(1)
+    df["us_aqi_lag_2h"] = df["us_aqi"].shift(2)
+    df["us_aqi_lag_3h"] = df["us_aqi"].shift(3)
     df["us_aqi_lag_6h"] = df["us_aqi"].shift(6)
     df["us_aqi_lag_24h"] = df["us_aqi"].shift(24)
     df["us_aqi_lag_48h"] = df["us_aqi"].shift(48)
     df["us_aqi_lag_72h"] = df["us_aqi"].shift(72)
+    df["us_aqi_lag_96h"] = df["us_aqi"].shift(96)
+    df["us_aqi_rolling_mean_12h"] = df["us_aqi"].rolling(window=12).mean()
     df["us_aqi_rolling_mean_24h"] = df["us_aqi"].rolling(window=24).mean()
     df["us_aqi_rolling_mean_72h"] = df["us_aqi"].rolling(window=72).mean()
     df["aqi_change_rate_1h"] = df["us_aqi"] - df["us_aqi_lag_1h"]
 
-    # PM2.5 Lags & Rolling Means
+    # PM2.5 Lags, Change Rate & Rolling Means
     df["pm2_5_lag_1h"] = df["pm2_5"].shift(1)
     df["pm2_5_lag_24h"] = df["pm2_5"].shift(24)
     df["pm2_5_lag_48h"] = df["pm2_5"].shift(48)
     df["pm2_5_lag_72h"] = df["pm2_5"].shift(72)
     df["pm2_5_rolling_mean_24h"] = df["pm2_5"].rolling(window=24).mean()
+    df["pm2_5_change_rate_1h"] = df["pm2_5"] - df["pm2_5_lag_1h"]
 
     # PM10 Lags
     df["pm10_lag_1h"] = df["pm10"].shift(1)
     df["pm10_lag_24h"] = df["pm10"].shift(24)
 
-    # Weather Contextual Lags
+    # Weather Contextual Lags & Rolling Means
     df["temperature_2m_lag_1h"] = df["temperature_2m"].shift(1)
     df["temperature_2m_lag_24h"] = df["temperature_2m"].shift(24)
     df["wind_speed_10m_lag_1h"] = df["wind_speed_10m"].shift(1)
     df["wind_speed_10m_lag_6h"] = df["wind_speed_10m"].shift(6)
     df["relative_humidity_2m_lag_1h"] = df["relative_humidity_2m"].shift(1)
     df["surface_pressure_lag_1h"] = df["surface_pressure"].shift(1)
+    df["surface_pressure_rolling_mean_24h"] = df["surface_pressure"].rolling(window=24).mean()
 
     # Precipitation & Rain Cumulative Sums
     df["precipitation_rolling_sum_6h"] = df["precipitation"].rolling(window=6).sum()
@@ -112,10 +118,14 @@ def add_targets(df):
     return df
 
 
-def run_backfill(start_date="2025-01-01", end_date=None):
-    """Fetches historical range, engineers features, and creates target columns."""
+def run_backfill(start_date=None, end_date=None):
+    """Fetches 3-year historical range, engineers features, and creates target columns."""
+    if start_date is None:
+        start_date = (pd.Timestamp.utcnow() - pd.DateOffset(years=3)).strftime("%Y-%m-%d")
     if end_date is None:
         end_date = pd.Timestamp.utcnow().strftime("%Y-%m-%d")
+
+    print(f"Fetching 3-Year Historical Dataset: {start_date} to {end_date}...")
 
     weather_params = {
         "latitude": LAT, "longitude": LON,
