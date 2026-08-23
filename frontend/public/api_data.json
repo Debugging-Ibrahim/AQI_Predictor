@@ -1,10 +1,10 @@
 {
   "region": "Faisalabad, Punjab, Pakistan",
-  "last_updated": "2026-08-23T20:34:42.493116+00:00",
+  "last_updated": "2026-08-23T21:17:26.013896+00:00",
   "predictions": {
     "today": 152.7,
     "day1": 152.7,
-    "day2": 136.0,
+    "day2": 141.7,
     "day3": 132.8
   },
   "models_loaded": {
@@ -16,41 +16,41 @@
     {
       "feature": "month_cos",
       "name": "Month Cos",
-      "impact": 10.8,
+      "impact": 10.6,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 10.8%"
+      "description": "Real CatBoost model importance: 10.6%"
     },
     {
       "feature": "surface_pressure_rolling_mean_24h",
       "name": "Surface Pressure Rolling Mean 24H",
-      "impact": 8.1,
+      "impact": 8.7,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 8.1%"
+      "description": "Real CatBoost model importance: 8.7%"
     },
     {
       "feature": "us_aqi_lag_96h",
       "name": "Us Aqi Lag 96H",
-      "impact": 8.0,
+      "impact": 7.9,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 8.0%"
+      "description": "Real CatBoost model importance: 7.9%"
     },
     {
       "feature": "us_aqi_rolling_mean_72h",
       "name": "Us Aqi Rolling Mean 72H",
-      "impact": 7.3,
+      "impact": 6.8,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 7.3%"
+      "description": "Real CatBoost model importance: 6.8%"
     },
     {
       "feature": "day_sin",
       "name": "Day Sin",
-      "impact": 5.2,
+      "impact": 5.5,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 5.2%"
+      "description": "Real CatBoost model importance: 5.5%"
     },
     {
-      "feature": "us_aqi_lag_48h",
-      "name": "Us Aqi Lag 48H",
+      "feature": "month_sin",
+      "name": "Month Sin",
       "impact": 5.0,
       "unit": "Weight %",
       "description": "Real CatBoost model importance: 5.0%"
