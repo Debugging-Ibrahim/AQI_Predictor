@@ -66,7 +66,14 @@ def generate_real_inference_json():
         raw_df = fetch_weather_and_aq(FORECAST_URL, weather_params, aq_params)
         df_feat = engineer_features(raw_df)
 
-        if len(raw_df) > 0:
+        if len(df_feat) > 0:
+            # Save newly fetched hourly features into Supabase DB (with automatic deduplication)
+            try:
+                from src.data.supabase_db import upload_dataframe_to_supabase
+                upload_dataframe_to_supabase(df_feat, batch_size=1000, deduplicate=True)
+            except Exception as db_err:
+                print(f"Supabase hourly upload note: {db_err}")
+
             last_row = raw_df.iloc[-1]
             if "pm2_5" in last_row and pd.notnull(last_row["pm2_5"]):
                 live_pm25 = round(float(last_row["pm2_5"]), 1)
