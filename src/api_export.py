@@ -99,7 +99,16 @@ def generate_real_inference_json():
             if c in last_df_row.index and pd.notnull(last_df_row[c]):
                 latest_row.at[0, c] = float(last_df_row[c])
 
-    # Calculate real predictions
+    # Calculate today's baseline telemetry AQI vs model forecast horizons
+    today_aqi = 152.0
+    if len(df_feat) > 0 and "us_aqi" in df_feat.columns:
+        val_aqi = df_feat["us_aqi"].iloc[-1]
+        if pd.notnull(val_aqi) and float(val_aqi) > 0:
+            today_aqi = round(float(val_aqi), 1)
+    elif latest_row.at[0, "us_aqi"] > 0:
+        today_aqi = round(float(latest_row.at[0, "us_aqi"]), 1)
+
+    # Calculate real model predictions per horizon
     real_preds = {}
     for h in ["day1", "day2", "day3"]:
         m = models[h]
@@ -153,8 +162,8 @@ def generate_real_inference_json():
         "region": "Faisalabad, Punjab, Pakistan",
         "last_updated": pd.Timestamp.utcnow().isoformat(),
         "predictions": {
-            "today": real_preds.get("day1", 149.7),
-            "day1": real_preds.get("day1", 149.7),
+            "today": today_aqi,
+            "day1": real_preds.get("day1", 162.0),
             "day2": real_preds.get("day2", 134.4),
             "day3": real_preds.get("day3", 131.6)
         },
