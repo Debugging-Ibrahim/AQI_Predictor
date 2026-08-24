@@ -1,6 +1,6 @@
 {
   "region": "Faisalabad, Punjab, Pakistan",
-  "last_updated": "2026-08-23T20:34:42.493116+00:00",
+  "last_updated": "2026-08-24T08:42:19.977109+00:00",
   "predictions": {
     "today": 149.7,
     "day1": 162.4,
@@ -16,41 +16,41 @@
     {
       "feature": "month_cos",
       "name": "Month Cos",
-      "impact": 10.8,
+      "impact": 10.6,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 10.8%"
+      "description": "Real CatBoost model importance: 10.6%"
     },
     {
       "feature": "surface_pressure_rolling_mean_24h",
       "name": "Surface Pressure Rolling Mean 24H",
-      "impact": 8.1,
+      "impact": 8.7,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 8.1%"
+      "description": "Real CatBoost model importance: 8.7%"
     },
     {
       "feature": "us_aqi_lag_96h",
       "name": "Us Aqi Lag 96H",
-      "impact": 8.0,
+      "impact": 7.9,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 8.0%"
+      "description": "Real CatBoost model importance: 7.9%"
     },
     {
       "feature": "us_aqi_rolling_mean_72h",
       "name": "Us Aqi Rolling Mean 72H",
-      "impact": 7.3,
+      "impact": 6.8,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 7.3%"
+      "description": "Real CatBoost model importance: 6.8%"
     },
     {
       "feature": "day_sin",
       "name": "Day Sin",
-      "impact": 5.2,
+      "impact": 5.5,
       "unit": "Weight %",
-      "description": "Real CatBoost model importance: 5.2%"
+      "description": "Real CatBoost model importance: 5.5%"
     },
     {
-      "feature": "us_aqi_lag_48h",
-      "name": "Us Aqi Lag 48H",
+      "feature": "month_sin",
+      "name": "Month Sin",
       "impact": 5.0,
       "unit": "Weight %",
       "description": "Real CatBoost model importance: 5.0%"
@@ -59,34 +59,34 @@
   "pollutants": [
     {
       "pollutant": "PM2.5",
-      "value": 73.8,
+      "value": 131.8,
       "unit": "\u00b5g/m\u00b3",
       "safetyThreshold": 35,
-      "percentageOfLimit": 210,
+      "percentageOfLimit": 376,
       "status": "Hazardous (2.6x EPA Limit)"
     },
     {
       "pollutant": "PM10",
-      "value": 94.1,
+      "value": 160.2,
       "unit": "\u00b5g/m\u00b3",
       "safetyThreshold": 150,
-      "percentageOfLimit": 62,
+      "percentageOfLimit": 106,
       "status": "Unhealthy"
     },
     {
       "pollutant": "NO2",
-      "value": 41.9,
+      "value": 92.2,
       "unit": "ppb",
       "safetyThreshold": 53,
-      "percentageOfLimit": 79,
+      "percentageOfLimit": 173,
       "status": "Moderate"
     },
     {
       "pollutant": "O3",
-      "value": 31.0,
+      "value": 0.0,
       "unit": "ppb",
       "safetyThreshold": 70,
-      "percentageOfLimit": 44,
+      "percentageOfLimit": 0,
       "status": "Good"
     }
   ],
