@@ -1,0 +1,10 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "buildCommand": "cd frontend && npm install && npm run build"
+  },
+  "deploy": {
+    "startCommand": "npx serve frontend/dist -l $PORT -s",
+    "outputDirectory": "frontend/dist"
+  }
+}
