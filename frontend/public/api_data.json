@@ -1,11 +1,11 @@
 {
   "region": "Faisalabad, Punjab, Pakistan",
-  "last_updated": "2026-08-24T23:19:16.938102+00:00",
+  "last_updated": "2026-08-25T00:57:23.891950+00:00",
   "predictions": {
-    "today": 160.8,
-    "day1": 160.7,
-    "day2": 161.7,
-    "day3": 132.8
+    "today": 168.6,
+    "day1": 153.2,
+    "day2": 160.4,
+    "day3": 141.8
   },
   "models_loaded": {
     "day1": "SVR",
@@ -59,58 +59,65 @@
   "pollutants": [
     {
       "pollutant": "PM2.5",
-      "value": 115.3,
+      "value": 92.2,
       "unit": "\u00b5g/m\u00b3",
       "safetyThreshold": 35,
-      "percentageOfLimit": 329,
+      "percentageOfLimit": 263,
       "status": "Hazardous (2.6x EPA Limit)"
     },
     {
       "pollutant": "PM10",
-      "value": 134.1,
+      "value": 109.4,
       "unit": "\u00b5g/m\u00b3",
       "safetyThreshold": 150,
-      "percentageOfLimit": 89,
+      "percentageOfLimit": 72,
       "status": "Unhealthy"
     },
     {
       "pollutant": "NO2",
-      "value": 83.0,
+      "value": 55.9,
       "unit": "ppb",
       "safetyThreshold": 53,
-      "percentageOfLimit": 156,
+      "percentageOfLimit": 105,
       "status": "Moderate"
     },
     {
       "pollutant": "O3",
-      "value": 0.0,
+      "value": 16.0,
       "unit": "ppb",
       "safetyThreshold": 70,
-      "percentageOfLimit": 0,
+      "percentageOfLimit": 22,
       "status": "Good"
     }
   ],
   "similar_days": [
     {
-      "date": "Nov 14, 2025",
-      "historicalAqi": 182,
-      "similarityScore": 96.8,
-      "matchedWeather": "Wind 4 km/h, Hum 76%, Inversion high",
+      "date": "Jul 02, 2025",
+      "historicalAqi": 153,
+      "similarityScore": 96.9,
+      "matchedWeather": "Wind 7.6 km/h, Hum 80.3%, Inversion high",
       "notes": "Crop stubble burning plume from East Punjab"
     },
     {
-      "date": "Dec 02, 2025",
-      "historicalAqi": 178,
-      "similarityScore": 94.2,
-      "matchedWeather": "Wind 3.5 km/h, Hum 78%",
+      "date": "Aug 05, 2026",
+      "historicalAqi": 156,
+      "similarityScore": 95.1,
+      "matchedWeather": "Wind 7.4 km/h, Hum 88.2%, Inversion high",
       "notes": "Stagnant thermal inversion layer over Faisalabad"
     },
     {
-      "date": "Nov 28, 2024",
-      "historicalAqi": 189,
-      "similarityScore": 91.5,
-      "matchedWeather": "Wind 5 km/h, Hum 72%",
+      "date": "Jul 10, 2024",
+      "historicalAqi": 155,
+      "similarityScore": 94.1,
+      "matchedWeather": "Wind 10.4 km/h, Hum 73.9%, Inversion high",
       "notes": "Urban traffic density + industrial brick kiln haze"
+    },
+    {
+      "date": "Aug 14, 2024",
+      "historicalAqi": 132,
+      "similarityScore": 93.8,
+      "matchedWeather": "Wind 11.0 km/h, Hum 74.6%, Inversion high",
+      "notes": "Post-monsoon low wind speed particulate trap"
     }
   ]
 }
