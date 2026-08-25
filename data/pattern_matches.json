@@ -1,0 +1,30 @@
+[
+  {
+    "date": "Jul 02, 2025",
+    "historicalAqi": 153,
+    "similarityScore": 96.9,
+    "matchedWeather": "Wind 7.6 km/h, Hum 80.3%, Inversion high",
+    "notes": "Crop stubble burning plume from East Punjab"
+  },
+  {
+    "date": "Aug 05, 2026",
+    "historicalAqi": 156,
+    "similarityScore": 95.1,
+    "matchedWeather": "Wind 7.4 km/h, Hum 88.2%, Inversion high",
+    "notes": "Stagnant thermal inversion layer over Faisalabad"
+  },
+  {
+    "date": "Jul 10, 2024",
+    "historicalAqi": 155,
+    "similarityScore": 94.1,
+    "matchedWeather": "Wind 10.4 km/h, Hum 73.9%, Inversion high",
+    "notes": "Urban traffic density + industrial brick kiln haze"
+  },
+  {
+    "date": "Aug 14, 2024",
+    "historicalAqi": 132,
+    "similarityScore": 93.8,
+    "matchedWeather": "Wind 11.0 km/h, Hum 74.6%, Inversion high",
+    "notes": "Post-monsoon low wind speed particulate trap"
+  }
+]

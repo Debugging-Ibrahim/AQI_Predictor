@@ -605,3 +605,15 @@ Across all nine challenges, the consistent resolution pattern was the same: **ne
 | **Day 2** | **SVR** | `RobustScaler` | $2.5\times$ Smog Penalty ($AQI > 150$) | **30.18** | **22.53** | **0.4780** | `saved_models/best_aqi_day2.joblib` |
 | **Day 3** | **CatBoostRegressor** | `None (Tree-Based)` | Standard Unweighted Fit | **31.79** | **24.33** | **0.3872** | `saved_models/best_aqi_day3.joblib` |
 
+
+
+---
+
+## Automated Pipeline Retraining Summary (2026-08-25 00:39:49)
+
+| Horizon | Winning Architecture | Preprocessor | Sample Weighting | Test RMSE | Test MAE | Test R² | Saved Artifact |
+| :--- | :--- | :--- | :--- | :---: | :---: | :---: | :--- |
+| **Day 1** | **SVR** | `StandardScaler` | Exponential Recency ($W_i = e^{-0.5 t_{age}}$) | **22.94** | **17.58** | **0.7198** | `saved_models/best_aqi_day1.joblib` |
+| **Day 2** | **SVR** | `RobustScaler` | $2.5\times$ Smog Penalty ($AQI > 150$) | **30.18** | **22.53** | **0.4780** | `saved_models/best_aqi_day2.joblib` |
+| **Day 3** | **CatBoostRegressor** | `None (Tree-Based)` | Standard Unweighted Fit | **31.79** | **24.33** | **0.3872** | `saved_models/best_aqi_day3.joblib` |
+
