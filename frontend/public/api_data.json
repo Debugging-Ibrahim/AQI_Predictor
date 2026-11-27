@@ -1,11 +1,11 @@
 {
   "region": "Faisalabad, Punjab, Pakistan",
-  "last_updated": "2026-11-27T04:45:08.306269+00:00",
+  "last_updated": "2026-11-27T14:37:49.826376+00:00",
   "predictions": {
-    "today": 230.8,
-    "day1": 234.7,
-    "day2": 230.1,
-    "day3": 217.8
+    "today": 214.9,
+    "day1": 231.0,
+    "day2": 224.5,
+    "day3": 214.4
   },
   "models_loaded": {
     "day1": "SVR",
@@ -59,26 +59,26 @@
   "pollutants": [
     {
       "pollutant": "PM2.5",
-      "value": 217.5,
+      "value": 207.2,
       "unit": "\u00b5g/m\u00b3",
       "safetyThreshold": 35,
-      "percentageOfLimit": 621,
+      "percentageOfLimit": 592,
       "status": "Hazardous (2.6x EPA Limit)"
     },
     {
       "pollutant": "PM10",
-      "value": 224.0,
+      "value": 213.3,
       "unit": "\u00b5g/m\u00b3",
       "safetyThreshold": 150,
-      "percentageOfLimit": 149,
+      "percentageOfLimit": 142,
       "status": "Unhealthy"
     },
     {
       "pollutant": "NO2",
-      "value": 92.1,
+      "value": 78.4,
       "unit": "ppb",
       "safetyThreshold": 53,
-      "percentageOfLimit": 173,
+      "percentageOfLimit": 147,
       "status": "Moderate"
     },
     {
